@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Allow access to index.html
+RewriteCond %{REQUEST_URI} ^/index\.html$ [OR]
+
+# Allow access to transcribe.php
+RewriteCond %{REQUEST_URI} ^/transcribes\.php$ [OR]
+
+# Allow direct access to files in root (optional, e.g., JS/CSS/images)
+RewriteCond %{REQUEST_FILENAME} -f
+
+# If any of the above are true, allow access
+RewriteRule ^ - [L]
+
+# Otherwise, redirect everything to index.html
+RewriteRule ^.*$ /index.html [L]
+</IfModule>
+php_value display_errors On
