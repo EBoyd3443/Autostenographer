@@ -1,0 +1,23 @@
+body {
+    background-color: #f0f0f0;
+}
+
+#transcript {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#transcript div {
+    border: 2px solid black;
+    background-color: #FED800;
+    font-weight: bold;
+    padding: 10px;
+    min-height: 50px;
+    width: calc(25% - 10px); /* 4 columns minus gap */
+    box-sizing: border-box;
+    break-inside: avoid;
+    border-radius: 5px;
+    margin: 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
