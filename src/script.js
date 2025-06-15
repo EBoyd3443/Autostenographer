@@ -1,6 +1,9 @@
 let mediaRecorder;
+    let summaryRest = false;
 
     let audioChunks = [];
+
+    let chatLog = "";
 
     document.getElementById('startBtn').onclick = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -43,6 +46,8 @@ let mediaRecorder;
             noteTitle.textContent = "Note: " + currentTime();
             let noteBody = document.createElement("p");
             noteBody.textContent = data.transcript;
+            chatLog += "Note: " + currentTime() + "\n";
+            chatLog += data.transcript + "\n";
             newNote.appendChild(noteTitle);
             newNote.appendChild(noteBody);
             document.getElementById('transcript').appendChild(newNote);
@@ -51,6 +56,31 @@ let mediaRecorder;
 
         mediaRecorder.start();
     };
+
+    document.getElementById('getSummary').onclick = async () => {
+        if(!summaryRest) {
+            summaryRest = true;
+
+            const response = await fetch('summary.php', {
+                method: 'POST',
+                body: JSON.stringify({ notes: chatLog })
+            })
+            console.log(response);
+            const summary = await response.json();
+            const blob = new Blob([summary['transcript']], { type: 'text/plain' });
+            const fileURL = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = fileURL;
+            downloadLink.download = 'Note_summary.txt';
+
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(fileURL);
+
+            summaryRest = false;
+        }
+    }
 
     document.getElementById('stopBtn').onclick = () => {
         mediaRecorder.stop();
