@@ -82,6 +82,19 @@ let mediaRecorder;
         }
     }
 
+    document.getElementById('getFullNotes').onclick = async () => {
+        const blob = new Blob(chatLog, { type: 'text/plain' });
+        const fileURL = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = fileURL;
+        downloadLink.download = 'Note_summary.txt';
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(fileURL);
+    }
+
     document.getElementById('stopBtn').onclick = () => {
         mediaRecorder.stop();
     };
