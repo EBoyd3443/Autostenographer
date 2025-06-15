@@ -1,8 +1,10 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Allow access to index.html
-RewriteCond %{REQUEST_URI} ^/index\.html$ [OR]
+DirectoryIndex index.php index.html
+
+# Allow access to index.php
+RewriteCond %{REQUEST_URI} ^/index\.php$ [OR]
 
 # Allow access to transcribe.php
 RewriteCond %{REQUEST_URI} ^/transcribes\.php$ [OR]
