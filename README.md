@@ -12,3 +12,5 @@ The site uses a simple front page file with two main php backend helper files wh
 >GPT-4o - Simple prompt design needed to give AI context for how to handle the summarization of the notes it would be given. 
 
 >GPT-4o-transcribe - Use of standard model for speech to text was all that was needed.
+
+[Pesentation slides](https://docs.google.com/presentation/d/13wBDnyquQsmke3Eg7WHBjDLYzlbjAbPZ1kzD3vXfPJk/edit?usp=sharing)
